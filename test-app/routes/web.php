@@ -13,6 +13,13 @@
 |
 */
 
+use App\Models\Event;
+
 $router->get('/', function () use ($router) {
-    return $router->app->version();
+    // phpinfo();
+    $events = Event::query()->latest()->limit(15);
+    echo '<h1>Latest 15 events:</h1>';
+    $events->each(function (Event $event) {
+        echo "{$event->getName()}<br/>";
+    });
 });
